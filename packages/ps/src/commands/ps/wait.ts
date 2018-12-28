@@ -2,10 +2,6 @@ import {Command, flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
 import {cli} from 'cli-ux'
 
-async function delay(millis: number) {
-  return new Promise(resolve => setTimeout(resolve, millis))
-}
-
 export default class Wait extends Command {
   static description = 'wait for a release to cycle in'
   static help = `
@@ -74,7 +70,7 @@ version.
 
       //cli.action.status(`${onLatest.length} / ${dynos.length}`)
 
-      await delay(interval * 1000)
+      await cli.wait(interval * 1000)
     }
   }
 }
