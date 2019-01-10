@@ -4,7 +4,7 @@
 let cmd = require('../../../commands/orgs')
 let stubGet = require('../../stub/get')
 
-describe('heroku orgs', () => {
+describe('heroku teams', () => {
   beforeEach(() => cli.mockConsole())
   afterEach(() => nock.cleanAll())
 

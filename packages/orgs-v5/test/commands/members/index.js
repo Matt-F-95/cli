@@ -10,12 +10,12 @@ describe('heroku members', () => {
 
   let apiGetteamMembers
 
-  context('when it is an Enterprise org', () => {
+  context('when it is an Enterprise team', () => {
     beforeEach(() => {
       stubGet.teamInfo('enterprise')
     })
 
-    it('shows there are not org members if it is an orpha team', () => {
+    it('shows there are not team members if it is an orpha team', () => {
       apiGetteamMembers = stubGet.teamMembers([])
       return cmd.run({org: 'myorg', flags: {}})
         .then(() => expect(
@@ -25,7 +25,7 @@ describe('heroku members', () => {
         .then(() => apiGetteamMembers.done())
     })
 
-    it('shows all the org members', () => {
+    it('shows all the team members', () => {
       apiGetteamMembers = stubGet.teamMembers([
         {email: 'a@heroku.com', role: 'admin'}, {email: 'b@heroku.com', role: 'collaborator'}
       ])

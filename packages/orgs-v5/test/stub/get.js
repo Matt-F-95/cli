@@ -173,9 +173,9 @@ function variableSizeTeamInvites (teamSize) {
 }
 
 function variableSizeteamMembers (orgSize) {
-  orgSize = (typeof (orgSize) === 'undefined') ? 1 : orgSize
+  teamSize = (typeof (teamSize) === 'undefined') ? 1 : teamSize
   let teamMembers = []
-  for (let i = 0; i < orgSize; i++) {
+  for (let i = 0; i < teamSize; i++) {
     teamMembers.push({email: `test${i}@heroku.com`,
       role: 'admin',
       user: { email: `test${i}@heroku.com` }})
