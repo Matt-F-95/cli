@@ -8,14 +8,14 @@ const {flags} = require('@heroku-cli/command')
 const {RoleCompletion} = require('@heroku-cli/command/lib/completions')
 
 function * run (context, heroku) {
-  let orgInfo = yield Utils.orgInfo(context, heroku)
+  let teamInfo = yield Utils.teamInfo(context, heroku)
   let groupName = context.org || context.team || context.flags.team
   let teamInvites = []
 
-  if (orgInfo.type === 'team') {
-    let orgFeatures = yield heroku.get(`/teams/${groupName}/features`)
+  if (teamInfo.type === 'team') {
+    let teamFeatures = yield heroku.get(`/teams/${groupName}/features`)
 
-    if (orgFeatures.find(feature => feature.name === 'team-invite-acceptance' && feature.enabled)) {
+    if (teamFeatures.find(feature => feature.name === 'team-invite-acceptance' && feature.enabled)) {
       teamInvites = yield heroku.request({
         headers: {
           Accept: 'application/vnd.heroku+json; version=3.team-invitations'
@@ -52,12 +52,12 @@ function * run (context, heroku) {
     })
   }
 
-  Utils.warnUsingOrgFlagInTeams(orgInfo, context)
+  Utils.warnUsingOrgFlagInTeams(teamInfo, context)
 }
 
 module.exports = {
   topic: 'members',
-  description: 'list members of an organization or a team',
+  description: 'list members of a team or a team',
   needsAuth: true,
   wantsOrg: true,
   flags: [

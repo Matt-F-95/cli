@@ -267,7 +267,7 @@ internal-app [internal/locked] (eu)
       })
     })
 
-    it('list all in an organization', function () {
+    it('list all in a team', function () {
       let mock = stubteamApps('test-org', [teamApp1, teamApp2])
       return apps.run({org: 'test-org', flags: {}, args: {}}).then(function () {
         mock.done()

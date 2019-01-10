@@ -8,19 +8,19 @@ describe('heroku orgs', () => {
   beforeEach(() => cli.mockConsole())
   afterEach(() => nock.cleanAll())
 
-  it('shows Enterprise orgs only when passing the --enterprise flag', () => {
-    let apiGetOrgs = stubGet.teams()
+  it('shows Enterprise teams only when passing the --enterprise flag', () => {
+    let apiGetTeams = stubGet.teams()
 
     return cmd.run({flags: { enterprise: true }})
       .then(() => expect(
         `org a          collaborator
 org b          admin\n`).to.eq(cli.stdout))
       .then(() => expect('').to.eq(cli.stderr))
-      .then(() => apiGetOrgs.done())
+      .then(() => apiGetTeams.done())
   })
 
-  it('shows orgs (now called teams)', () => {
-    let apiGetOrgsOnly = stubGet.teams([
+  it('shows teams', () => {
+    let apiGetTeamsOnly = stubGet.teams([
       {name: 'org a', role: 'collaborator', type: 'enterprise'},
       {name: 'org b', role: 'admin', type: 'enterprise'}
     ])
@@ -30,6 +30,6 @@ org b          admin\n`).to.eq(cli.stdout))
         `org a          collaborator
 org b          admin\n`).to.eq(cli.stdout))
       .then(() => expect('').to.eq(cli.stderr))
-      .then(() => apiGetOrgsOnly.done())
+      .then(() => apiGetTeamsOnly.done())
   })
 })

@@ -9,12 +9,12 @@ describe('heroku members:remove', () => {
   beforeEach(() => cli.mockConsole())
   afterEach(() => nock.cleanAll())
 
-  context('from an org', () => {
+  context('from a team', () => {
     beforeEach(() => {
-      stubGet.orgInfo('enterprise')
+      stubGet.teamInfo('enterprise')
     })
 
-    it('removes a member from an org', () => {
+    it('removes a member from a team', () => {
       let apiRemoveMemberFromOrg = stubDelete.memberFromTeam()
       return cmd.run({org: 'myorg', args: {email: 'foo@foo.com'}})
         .then(() => expect('').to.eq(cli.stdout))
@@ -25,12 +25,12 @@ describe('heroku members:remove', () => {
 
   context('from a team', () => {
     beforeEach(() => {
-      stubGet.orgInfo('team')
+      stubGet.teamInfo('team')
     })
 
     context('without the feature flag team-invite-acceptance', () => {
       beforeEach(() => {
-        stubGet.orgFeatures([])
+        stubGet.teamFeatures([])
       })
 
       context('using --org instead of --team', () => {
@@ -46,7 +46,7 @@ describe('heroku members:remove', () => {
         })
       })
 
-      it('removes a member from an org', () => {
+      it('removes a member from a team', () => {
         let apiRemoveMemberFromOrg = stubDelete.memberFromTeam()
         return cmd.run({args: {email: 'foo@foo.com'}, flags: {team: 'myorg'}})
           .then(() => expect('').to.eq(cli.stdout))
@@ -59,7 +59,7 @@ describe('heroku members:remove', () => {
       let apiGetTeamInvites
 
       beforeEach(() => {
-        stubGet.orgFeatures([{name: 'team-invite-acceptance', enabled: true}])
+        stubGet.teamFeatures([{name: 'team-invite-acceptance', enabled: true}])
       })
 
       context('with no pending invites', () => {

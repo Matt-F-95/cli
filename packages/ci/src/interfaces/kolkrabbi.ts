@@ -161,7 +161,7 @@ export interface HerokuPlatformApiOrganization {
    */
   default?: boolean
   /**
-   * upper limit of members allowed in an organization.
+   * upper limit of members allowed in a team.
    */
   membership_limit?: number | null
   /**

@@ -99,7 +99,7 @@ Initiating transfer of myapp... email sent
         .then(() => api.done())
     })
 
-    it('transfers the app to an organization', () => {
+    it('transfers the app to a team', () => {
       let api = stubPatch.teamAppTransfer()
       return cmd.run({app: 'myapp', args: {recipient: 'team'}, flags: {}})
         .then(() => expect('').to.eq(cli.stdout))
@@ -109,7 +109,7 @@ Initiating transfer of myapp... email sent
     })
   })
 
-  context('when it is an org app', () => {
+  context('when it is a team app', () => {
     beforeEach(() => {
       stubGet.teamApp()
     })
@@ -123,7 +123,7 @@ Initiating transfer of myapp... email sent
         .then(() => api.done())
     })
 
-    it('transfers the app to an organization', () => {
+    it('transfers the app to a team', () => {
       let api = stubPatch.teamAppTransfer()
       return cmd.run({app: 'myapp', args: {recipient: 'team'}, flags: {}})
         .then(() => expect('').to.eq(cli.stdout))

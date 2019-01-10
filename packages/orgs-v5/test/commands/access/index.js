@@ -30,7 +30,7 @@ raulb@heroku.com  owner
 
     it('shows the app collaborators and hides the org collaborator record', () => {
       let apiGetteamApp = stubGet.teamApp()
-      let apiGetOrgMembers = stubGet.orgMembers()
+      let apiGetteamMembers = stubGet.teamMembers()
       let apiGetAppPermissions = stubGet.appPermissions()
       let apiGetteamAppCollaboratorsWithPermissions = stubGet.teamAppCollaboratorsWithPermissions()
 
@@ -41,7 +41,7 @@ raulb@heroku.com  admin   deploy,manage,operate,view
 `).to.eq(cli.stdout))
         .then(() => expect('').to.eq(cli.stderr))
         .then(() => apiGetteamApp.done())
-        .then(() => apiGetOrgMembers.done())
+        .then(() => apiGetteamMembers.done())
         .then(() => apiGetAppPermissions.done())
         .then(() => apiGetteamAppCollaboratorsWithPermissions.done())
     })

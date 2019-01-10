@@ -10,17 +10,17 @@ describe('heroku members:set', () => {
 
   beforeEach(() => {
     cli.mockConsole()
-    stubGet.orgFeatures([])
+    stubGet.teamFeatures([])
   })
   afterEach(() => nock.cleanAll())
 
   context('and group is a team', () => {
     beforeEach(() => {
-      stubGet.orgInfo('team')
+      stubGet.teamInfo('team')
     })
 
     it('does not warn the user when under the free org limit', () => {
-      stubGet.variableSizeOrgMembers(1)
+      stubGet.variableSizeteamMembers(1)
       stubGet.variableSizeTeamInvites(0)
       apiUpdateMemberRole = stubPatch.updateMemberRole('foo@foo.com', 'admin')
 
@@ -32,7 +32,7 @@ describe('heroku members:set', () => {
     })
 
     it('does not warn the user when over the free org limit', () => {
-      stubGet.variableSizeOrgMembers(7)
+      stubGet.variableSizeteamMembers(7)
       stubGet.variableSizeTeamInvites(0)
       apiUpdateMemberRole = stubPatch.updateMemberRole('foo@foo.com', 'admin')
 
@@ -44,7 +44,7 @@ describe('heroku members:set', () => {
     })
 
     it('does warn the user when at the free org limit', () => {
-      stubGet.variableSizeOrgMembers(6)
+      stubGet.variableSizeteamMembers(6)
       stubGet.variableSizeTeamInvites(0)
       apiUpdateMemberRole = stubPatch.updateMemberRole('foo@foo.com', 'admin')
 
@@ -57,7 +57,7 @@ describe('heroku members:set', () => {
 
     context('using --org instead of --team', () => {
       it('adds the member, but it shows a warning about the usage of -t instead', () => {
-        stubGet.variableSizeOrgMembers(1)
+        stubGet.variableSizeteamMembers(1)
         stubGet.variableSizeTeamInvites(0)
 
         apiUpdateMemberRole = stubPatch.updateMemberRole('foo@foo.com', 'admin')
@@ -72,11 +72,11 @@ describe('heroku members:set', () => {
 
   context('and group is an enterprise org', () => {
     beforeEach(() => {
-      stubGet.orgInfo('enterprise')
-      stubGet.variableSizeOrgMembers(1)
+      stubGet.teamInfo('enterprise')
+      stubGet.variableSizeteamMembers(1)
     })
 
-    it('adds a member to an org', () => {
+    it('adds a member to a team', () => {
       apiUpdateMemberRole = stubPatch.updateMemberRole('foo@foo.com', 'admin')
 
       return cmd.run({org: 'myorg', args: {email: 'foo@foo.com'}, flags: {role: 'admin'}})

@@ -9,7 +9,7 @@ describe('heroku teams', () => {
   afterEach(() => nock.cleanAll())
 
   it('shows only the Heroku Teams', () => {
-    let apiGetOrgs = stubGet.teams()
+    let apiGetTeams = stubGet.teams()
 
     return cmd.run({flags: {}})
       .then(() => expect(
@@ -17,6 +17,6 @@ describe('heroku teams', () => {
 team b  admin
 `).to.eq(cli.stdout))
       .then(() => expect('').to.eq(cli.stderr))
-      .then(() => apiGetOrgs.done())
+      .then(() => apiGetTeams.done())
   })
 })

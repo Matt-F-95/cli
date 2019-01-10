@@ -9,15 +9,15 @@ let stubGet = require('../../stub/get')
 let stubPost = require('../../stub/post')
 let apiGet
 let apiPost
-let apiGetOrgFeatures
+let apiGetteamFeatures
 
 describe('heroku access:add', () => {
-  context('with an org app with user permissions', () => {
+  context('with a team app with user permissions', () => {
     beforeEach(() => {
       cli.mockConsole()
       apiGet = stubGet.teamApp()
       apiPost = stubPost.teamAppCollaborators('raulb@heroku.com', ['deploy', 'view'])
-      apiGetOrgFeatures = stubGet.orgFeatures([{ name: 'org-access-controls' }])
+      apiGetteamFeatures = stubGet.teamFeatures([{ name: 'org-access-controls' }])
     })
     afterEach(() => nock.cleanAll())
 
@@ -27,7 +27,7 @@ describe('heroku access:add', () => {
         .then(() => expect(`Adding raulb@heroku.com access to the app myapp with deploy,view permissions... done
 `).to.eq(cli.stderr))
         .then(() => apiGet.done())
-        .then(() => apiGetOrgFeatures.done())
+        .then(() => apiGetteamFeatures.done())
         .then(() => apiPost.done())
     })
 
@@ -37,7 +37,7 @@ describe('heroku access:add', () => {
         .then(() => expect(`Adding raulb@heroku.com access to the app myapp with deploy,view permissions... done
 `).to.eq(cli.stderr))
         .then(() => apiGet.done())
-        .then(() => apiGetOrgFeatures.done())
+        .then(() => apiGetteamFeatures.done())
         .then(() => apiPost.done())
     })
 
@@ -48,7 +48,7 @@ describe('heroku access:add', () => {
         app: 'myapp', args: {email: 'raulb@heroku.com'}, flags: {}
       }).then(() => {
         apiGet.done()
-        apiGetOrgFeatures.done()
+        apiGetteamFeatures.done()
         apiPost.done()
       })).then(function () {
         expect(unwrap(cli.stderr)).to.equal(` ▸    Missing argument: permissions
@@ -63,12 +63,12 @@ describe('heroku access:add', () => {
     })
   })
 
-  context('with an org app without user permissions', () => {
+  context('with a team app without user permissions', () => {
     beforeEach(() => {
       cli.mockConsole()
       apiGet = stubGet.teamApp()
       apiPost = stubPost.collaborators()
-      apiGetOrgFeatures = stubGet.orgFeatures([])
+      apiGetteamFeatures = stubGet.teamFeatures([])
     })
     afterEach(() => nock.cleanAll())
 
@@ -78,12 +78,12 @@ describe('heroku access:add', () => {
         .then(() => expect(`Adding raulb@heroku.com access to the app myapp... done
 `).to.eq(cli.stderr))
         .then(() => apiGet.done())
-        .then(() => apiGetOrgFeatures.done())
+        .then(() => apiGetteamFeatures.done())
         .then(() => apiPost.done())
     })
   })
 
-  context('with a non org app', () => {
+  context('with a non team app', () => {
     beforeEach(() => {
       cli.mockConsole()
       apiGet = stubGet.personalApp()

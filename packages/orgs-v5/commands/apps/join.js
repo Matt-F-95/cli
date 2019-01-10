@@ -17,7 +17,7 @@ function * run (context, heroku) {
 let cmd = {
   topic: 'apps',
   command: 'join',
-  description: 'add yourself to an organization app',
+  description: 'add yourself to a team app',
   needsAuth: true,
   needsApp: true,
   run: cli.command(co.wrap(run))
