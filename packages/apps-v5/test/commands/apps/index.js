@@ -312,7 +312,7 @@ team-app-2
     beforeEach(function () {
       return nock('https://api.heroku.com')
         .get('/spaces/test-space')
-        .reply(200, {organization: {name: 'test-team'}})
+        .reply(200, {team: {name: 'test-team'}})
     })
 
     it('displays a message when the space has no apps', function () {
