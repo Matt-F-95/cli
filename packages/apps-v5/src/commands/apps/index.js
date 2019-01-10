@@ -8,8 +8,8 @@ const {SpaceCompletion} = require('@heroku-cli/command/lib/completions')
 function * run (context, heroku) {
   const {sortBy, partition} = require('lodash')
 
-  let team = context.org || context.team || context.flags.team
-  let team = (!context.flags.personal && team) ? team : null
+  let teamArg = context.org || context.team || context.flags.team
+  let team = (!context.flags.personal && teamArg) ? teamArg : null
   let space = context.flags.space
   let internalRouting = context.flags['internal-routing']
   if (space) team = (yield heroku.get(`/spaces/${space}`)).team.name
