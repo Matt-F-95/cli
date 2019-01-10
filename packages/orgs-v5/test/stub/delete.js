@@ -21,7 +21,7 @@ function teamInvite (email = 'foo@email.com') {
     .delete(`/teams/myorg/invitations/${email}`).reply(200, {})
 }
 
-function memberFromOrg () {
+function memberFromTeam () {
   return nock('https://api.heroku.com:443', {})
     .delete('/teams/myorg/members/foo%40foo.com').reply(200)
 }
@@ -29,6 +29,6 @@ function memberFromOrg () {
 module.exports = {
   collaboratorsOrgApp,
   collaboratorsPersonalApp,
-  memberFromOrg,
+  memberFromTeam,
   teamInvite
 }
