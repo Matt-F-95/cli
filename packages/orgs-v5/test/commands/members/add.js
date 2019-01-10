@@ -26,9 +26,9 @@ describe('heroku members:add', () => {
         stubGet.variableSizeTeamInvites(0)
         apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
 
-        return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myorg'}})
+        return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myteam'}})
           .then(() => expect('').to.eq(cli.stdout))
-          .then(() => expect(`Adding foo@foo.com to myorg as admin... done
+          .then(() => expect(`Adding foo@foo.com to myteam as admin... done
 `).to.eq(cli.stderr))
           .then(() => apiUpdateMemberRole.done())
       })
@@ -38,9 +38,9 @@ describe('heroku members:add', () => {
         stubGet.variableSizeTeamInvites(0)
         apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
 
-        return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myorg'}})
+        return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myteam'}})
           .then(() => expect('').to.eq(cli.stdout))
-          .then(() => expect(`Adding foo@foo.com to myorg as admin... done
+          .then(() => expect(`Adding foo@foo.com to myteam as admin... done
 `).to.eq(cli.stderr))
           .then(() => apiUpdateMemberRole.done())
       })
@@ -50,9 +50,9 @@ describe('heroku members:add', () => {
         stubGet.variableSizeTeamInvites(0)
         apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
 
-        return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myorg'}})
+        return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myteam'}})
           .then(() => expect('').to.eq(cli.stdout))
-          .then(() => expect(`Adding foo@foo.com to myorg as admin... done
+          .then(() => expect(`Adding foo@foo.com to myteam as admin... done
  ▸    You'll be billed monthly for teams over 5 members.\n`).to.eq(cli.stderr))
           .then(() => apiUpdateMemberRole.done())
       })
@@ -63,10 +63,10 @@ describe('heroku members:add', () => {
           stubGet.variableSizeTeamInvites(0)
 
           apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
-          return cmd.run({org: 'myorg', args: {email: 'foo@foo.com'}, flags: {role: 'admin'}})
+          return cmd.run({org: 'myteam', args: {email: 'foo@foo.com'}, flags: {role: 'admin'}})
             .then(() => expect('').to.eq(cli.stdout))
-            .then(() => expect(`Adding foo@foo.com to myorg as admin... done
- ▸    myorg is a Heroku Team\n ▸    Heroku CLI now supports Heroku Teams.\n ▸    Use -t or --team for teams like myorg\n`).to.eq(cli.stderr))
+            .then(() => expect(`Adding foo@foo.com to myteam as admin... done
+ ▸    myteam is a Heroku Team\n ▸    Heroku CLI now supports Heroku Teams.\n ▸    Use -t or --team for teams like myteam\n`).to.eq(cli.stderr))
             .then(() => apiUpdateMemberRole.done())
         })
       })
@@ -81,9 +81,9 @@ describe('heroku members:add', () => {
       it('adds a member to a team', () => {
         apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
 
-        return cmd.run({org: 'myorg', args: {email: 'foo@foo.com'}, flags: {role: 'admin'}})
+        return cmd.run({org: 'myteam', args: {email: 'foo@foo.com'}, flags: {role: 'admin'}})
           .then(() => expect('').to.eq(cli.stdout))
-          .then(() => expect(`Adding foo@foo.com to myorg as admin... done
+          .then(() => expect(`Adding foo@foo.com to myteam as admin... done
 `).to.eq(cli.stderr))
           .then(() => apiUpdateMemberRole.done())
       })
@@ -102,12 +102,12 @@ describe('heroku members:add', () => {
       let apiGetteamMembers = stubGet.variableSizeteamMembers(1)
       let apiGetTeamInvites = stubGet.variableSizeTeamInvites(5)
 
-      return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myorg'}})
+      return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myteam'}})
         .then(() => apiSendInvite.done())
         .then(() => apiGetteamMembers.done())
         .then(() => apiGetTeamInvites.done())
         .then(() => expect('').to.eq(cli.stdout))
-        .then(() => expect(`Inviting foo@foo.com to myorg as admin... email sent
+        .then(() => expect(`Inviting foo@foo.com to myteam as admin... email sent
  ▸    You'll be billed monthly for teams over 5 members.\n`).to.eq(cli.stderr))
     })
 
@@ -117,9 +117,9 @@ describe('heroku members:add', () => {
       stubGet.variableSizeteamMembers(1)
       stubGet.variableSizeTeamInvites(0)
 
-      return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myorg'}})
+      return cmd.run({args: {email: 'foo@foo.com'}, flags: {role: 'admin', team: 'myteam'}})
         .then(() => expect('').to.eq(cli.stdout))
-        .then(() => expect(`Inviting foo@foo.com to myorg as admin... email sent\n`).to.eq(cli.stderr))
+        .then(() => expect(`Inviting foo@foo.com to myteam as admin... email sent\n`).to.eq(cli.stderr))
         .then(() => apiSendInvite.done())
     })
   })

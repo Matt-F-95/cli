@@ -40,10 +40,10 @@ async function run (context, heroku) {
   let collaborators = await heroku.get(`/apps/${appName}/collaborators`)
 
   if (isteamApp) {
-    let orgName = Utils.getOwner(app.owner.email)
+    let teamName = Utils.getOwner(app.owner.email)
 
     try {
-      const members = await heroku.get(`/teams/${orgName}/members`)
+      const members = await heroku.get(`/teams/${teamName}/members`)
       let admins = members.filter(member => member.role === 'admin')
 
       let adminPermissions = await heroku.get('/teams/permissions')

@@ -17,9 +17,9 @@ describe('heroku members', () => {
 
     it('shows there are not team members if it is an orpha team', () => {
       apiGetteamMembers = stubGet.teamMembers([])
-      return cmd.run({org: 'myorg', flags: {}})
+      return cmd.run({org: 'myteam', flags: {}})
         .then(() => expect(
-          `No members in myorg
+          `No members in myteam
 `).to.eq(cli.stdout))
         .then(() => expect('').to.eq(cli.stderr))
         .then(() => apiGetteamMembers.done())
@@ -29,7 +29,7 @@ describe('heroku members', () => {
       apiGetteamMembers = stubGet.teamMembers([
         {email: 'a@heroku.com', role: 'admin'}, {email: 'b@heroku.com', role: 'collaborator'}
       ])
-      return cmd.run({org: 'myorg', flags: {}})
+      return cmd.run({org: 'myteam', flags: {}})
         .then(() => expect(
           `a@heroku.com  admin
 b@heroku.com  collaborator
@@ -42,7 +42,7 @@ b@heroku.com  collaborator
 
     it('filters members by role', () => {
       apiGetteamMembers = stubGet.teamMembers(expectedteamMembers)
-      return cmd.run({org: 'myorg', flags: {role: 'member'}})
+      return cmd.run({org: 'myteam', flags: {role: 'member'}})
         .then(() => expect(
           `b@heroku.com  member
 `).to.eq(cli.stdout))
@@ -52,9 +52,9 @@ b@heroku.com  collaborator
 
     it("shows the right message when filter doesn't return results", () => {
       apiGetteamMembers = stubGet.teamMembers(expectedteamMembers)
-      return cmd.run({org: 'myorg', flags: {role: 'collaborator'}})
+      return cmd.run({org: 'myteam', flags: {role: 'collaborator'}})
         .then(() => expect(
-          `No members in myorg with role collaborator
+          `No members in myteam with role collaborator
 `).to.eq(cli.stdout))
         .then(() => expect('').to.eq(cli.stderr))
         .then(() => apiGetteamMembers.done())
@@ -62,7 +62,7 @@ b@heroku.com  collaborator
 
     it('filters members by role', () => {
       apiGetteamMembers = stubGet.teamMembers(expectedteamMembers)
-      return cmd.run({org: 'myorg', flags: {role: 'member'}})
+      return cmd.run({org: 'myteam', flags: {role: 'member'}})
         .then(() => expect(
           `b@heroku.com  member
 `).to.eq(cli.stdout))
@@ -86,11 +86,11 @@ b@heroku.com  collaborator
           apiGetteamMembers = stubGet.teamMembers([
             {email: 'a@heroku.com', role: 'admin'}, {email: 'b@heroku.com', role: 'collaborator'}
           ])
-          return cmd.run({org: 'myorg', flags: {}})
+          return cmd.run({org: 'myteam', flags: {}})
             .then(() => expect(
               `a@heroku.com  admin
 b@heroku.com  collaborator\n`).to.eq(cli.stdout))
-            .then(() => expect(' ▸    myorg is a Heroku Team\n ▸    Heroku CLI now supports Heroku Teams.\n ▸    Use -t or --team for teams like myorg\n').to.eq(cli.stderr))
+            .then(() => expect(' ▸    myteam is a Heroku Team\n ▸    Heroku CLI now supports Heroku Teams.\n ▸    Use -t or --team for teams like myteam\n').to.eq(cli.stderr))
             .then(() => apiGetteamMembers.done())
         })
       })
@@ -108,7 +108,7 @@ b@heroku.com  collaborator\n`).to.eq(cli.stdout))
           {email: 'a@heroku.com', role: 'admin'}, {email: 'b@heroku.com', role: 'collaborator'}
         ])
 
-        return cmd.run({flags: {team: 'myorg'}})
+        return cmd.run({flags: {team: 'myteam'}})
           .then(() => expect(
             `a@heroku.com           admin
 b@heroku.com           collaborator
@@ -126,7 +126,7 @@ invited-user@mail.com  admin         pending
           {email: 'a@heroku.com', role: 'admin'}, {email: 'b@heroku.com', role: 'collaborator'}
         ])
 
-        return cmd.run({flags: {team: 'myorg', pending: true}})
+        return cmd.run({flags: {team: 'myteam', pending: true}})
           .then(() => expect(
             `invited-user@mail.com  admin  pending
 `).to.eq(cli.stdout))

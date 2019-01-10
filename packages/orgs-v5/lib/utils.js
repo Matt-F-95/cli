@@ -17,7 +17,7 @@ let isValidEmail = function (email) {
   return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 }
 
-let printGroups = function (group, type = {label: 'Organization'}) {
+let printGroups = function (group, type = {label: 'Team'}) {
   group = _.sortBy(group, 'name')
   cli.table(group, {
     columns: [
@@ -44,7 +44,7 @@ let warnUsingOrgFlagInTeams = function (teamInfo, context) {
   }
 }
 
-let addMemberToOrg = function * (email, role, groupName, heroku, method = 'PUT') {
+let addMemberToTeam = function * (email, role, groupName, heroku, method = 'PUT') {
   let request = heroku.request({
     method: method,
     path: `/teams/${groupName}/members`,
@@ -74,7 +74,7 @@ let warnIfAtTeamMemberLimit = async function (teamInfo, groupName, context, hero
 }
 
 module.exports = {
-  addMemberToOrg,
+  addMemberToTeam,
   getOwner,
   isteamApp,
   isValidEmail,

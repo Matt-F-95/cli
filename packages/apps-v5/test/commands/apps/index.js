@@ -48,12 +48,12 @@ let collabApp = {
 }
 
 let teamApp1 = {
-  name: 'org-app-1',
+  name: 'team-app-1',
   owner: {email: 'test-org@herokumanager.com'}
 }
 
 let teamApp2 = {
-  name: 'org-app-2',
+  name: 'team-app-2',
   owner: {email: 'test-org@herokumanager.com'}
 }
 
@@ -141,7 +141,7 @@ example
 
 === Collaborated Apps
 collab-app  someone-else@bar.com
-org-app-1   test-org@herokumanager.com
+team-app-1   test-org@herokumanager.com
 `)
       })
     })
@@ -274,8 +274,8 @@ internal-app [internal/locked] (eu)
         expect(cli.stderr).to.equal('')
         expect(cli.stdout).to.equal(
           `=== Apps in team test-org
-org-app-1
-org-app-2
+team-app-1
+team-app-2
 
 `)
       })
@@ -300,8 +300,8 @@ org-app-2
         expect(cli.stderr).to.equal('')
         expect(cli.stdout).to.equal(
           `=== Apps in team test-team
-org-app-1
-org-app-2
+team-app-1
+team-app-2
 
 `)
       })

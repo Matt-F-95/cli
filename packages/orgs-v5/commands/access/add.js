@@ -14,8 +14,8 @@ async function run (context, heroku) {
   let teamFeatures = []
 
   if (Utils.isteamApp(appInfo.owner.email)) {
-    let orgName = Utils.getOwner(appInfo.owner.email)
-    teamFeatures = await heroku.get(`/teams/${orgName}/features`)
+    let teamName = Utils.getOwner(appInfo.owner.email)
+    teamFeatures = await heroku.get(`/teams/${teamName}/features`)
   }
 
   if (teamFeatures.find(feature => feature.name === 'org-access-controls')) {

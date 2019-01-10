@@ -18,7 +18,7 @@ This app is already locked.`)
 }
 
 let cmd = {
-  description: 'prevent organization members from joining an app',
+  description: 'prevent team members from joining an app',
   needsAuth: true,
   needsApp: true,
   run: cli.command(co.wrap(run))

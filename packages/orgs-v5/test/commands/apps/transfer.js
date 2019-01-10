@@ -27,8 +27,8 @@ describe('heroku apps:transfer', () => {
         let choices = prompts[0].choices
         expect(choices).to.eql([
           {
-            name: 'my-org-app (organization)',
-            value: { name: 'my-org-app', owner: 'organization@herokumanager.com' }
+            name: 'my-team-app (organization)',
+            value: { name: 'my-team-app', owner: 'organization@herokumanager.com' }
           },
           {
             name: 'my-team-app (team)',
@@ -58,8 +58,8 @@ Transferring myapp... done
         let choices = prompts[0].choices
         expect(choices).to.eql([
           {
-            name: 'my-org-app (organization)',
-            value: { name: 'my-org-app', owner: 'organization@herokumanager.com' }
+            name: 'my-team-app (organization)',
+            value: { name: 'my-team-app', owner: 'organization@herokumanager.com' }
           },
           {
             name: 'my-team-app (team)',

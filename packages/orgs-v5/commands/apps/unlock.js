@@ -20,7 +20,7 @@ This app is not locked.`)
 let cmd = {
   topic: 'apps',
   command: 'unlock',
-  description: 'unlock an app so any organization member can join',
+  description: 'unlock an app so any team member can join',
   needsAuth: true,
   needsApp: true,
   run: cli.command(co.wrap(run))

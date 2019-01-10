@@ -6,9 +6,9 @@ const {flags} = require('@heroku-cli/command')
 
 function * run (context, heroku) {
   let team = context.org || context.team || context.flags.team
-  if (!team) throw new Error('No organization specified')
-  let org = yield heroku.get(`/teams/${team}`)
-  yield cli.open(`https://dashboard.heroku.com/orgs/${org.name}`)
+  if (!team) throw new Error('No team specified')
+  let team = yield heroku.get(`/teams/${team}`)
+  yield cli.open(`https://dashboard.heroku.com/orgs/${team.name}`)
 }
 
 module.exports = {

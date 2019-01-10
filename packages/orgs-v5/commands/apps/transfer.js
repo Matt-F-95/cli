@@ -51,7 +51,7 @@ function * run (context, heroku) {
   } else { // Single app transfer
     let appInfo = yield heroku.get(`/apps/${app}`)
 
-    // Shows warning when app is transferred from a team/org to a personal account
+    // Shows warning when app is transferred from a team to a personal account
     if (Utils.isValidEmail(recipient) && Utils.isteamApp(appInfo.owner.email)) {
       yield cli.confirmApp(app, context.flags.confirm, 'All collaborators will be removed from this app')
     }
