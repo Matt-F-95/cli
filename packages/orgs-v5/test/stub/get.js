@@ -7,7 +7,7 @@ function apps () {
     .get('/apps')
     .reply(200, [
       { name: 'my-team-app', owner: { email: 'team@herokumanager.com' } },
-      { name: 'my-team-app', owner: { email: 'organization@herokumanager.com' } },
+      { name: 'my-org-app', owner: { email: 'organization@herokumanager.com' } },
       { name: 'myapp', owner: { email: 'foo@foo.com' } }
     ])
 }
