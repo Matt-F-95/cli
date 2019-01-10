@@ -9,7 +9,7 @@ function collaborators () {
     }).reply(200)
 }
 
-function orgAppcollaborators (email = 'raulb@heroku.com', permissions = [], response = {}) {
+function teamAppCollaborators (email = 'raulb@heroku.com', permissions = [], response = {}) {
   let body = { user: email }
   if (permissions.length) {
     body.permissions = permissions
@@ -30,5 +30,5 @@ function personalToPersonal () {
 module.exports = {
   collaborators,
   personalToPersonal,
-  orgAppcollaborators
+  teamAppCollaborators
 }

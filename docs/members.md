@@ -1,7 +1,7 @@
 `heroku members`
 ================
 
-manage organization members
+manage team members
 
 * [`heroku members`](#heroku-members)
 * [`heroku members:add EMAIL`](#heroku-membersadd-email)
@@ -10,7 +10,7 @@ manage organization members
 
 ## `heroku members`
 
-list members of an organization or a team
+list members of a team
 
 ```
 USAGE
@@ -25,7 +25,7 @@ OPTIONS
 
 ## `heroku members:add EMAIL`
 
-adds a user to an organization or a team
+adds a user to a team
 
 ```
 USAGE
@@ -38,7 +38,7 @@ OPTIONS
 
 ## `heroku members:remove EMAIL`
 
-removes a user from an organization or a team
+removes a user from a team
 
 ```
 USAGE
@@ -50,7 +50,7 @@ OPTIONS
 
 ## `heroku members:set EMAIL`
 
-sets a members role in an organization or a team
+sets a members role in a team
 
 ```
 USAGE
