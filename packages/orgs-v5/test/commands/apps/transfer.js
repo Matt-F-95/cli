@@ -111,7 +111,7 @@ Initiating transfer of myapp... email sent
 
   context('when it is an org app', () => {
     beforeEach(() => {
-      stubGet.orgApp()
+      stubGet.teamApp()
     })
 
     it('transfers the app to a personal account confirming app name', () => {

@@ -3,13 +3,13 @@ let cli = require('heroku-cli-util')
 let error = require('./error')
 
 let getOwner = function (owner) {
-  if (isOrgApp(owner)) {
+  if (isteamApp(owner)) {
     return owner.split('@herokumanager.com')[0]
   }
   return owner
 }
 
-let isOrgApp = function (owner) {
+let isteamApp = function (owner) {
   return (/@herokumanager\.com$/.test(owner))
 }
 
@@ -76,7 +76,7 @@ let warnIfAtTeamMemberLimit = async function (orgInfo, groupName, context, herok
 module.exports = {
   addMemberToOrg,
   getOwner,
-  isOrgApp,
+  isteamApp,
   isValidEmail,
   orgInfo,
   printGroups,

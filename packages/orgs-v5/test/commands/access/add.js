@@ -15,7 +15,7 @@ describe('heroku access:add', () => {
   context('with an org app with user permissions', () => {
     beforeEach(() => {
       cli.mockConsole()
-      apiGet = stubGet.orgApp()
+      apiGet = stubGet.teamApp()
       apiPost = stubPost.teamAppCollaborators('raulb@heroku.com', ['deploy', 'view'])
       apiGetOrgFeatures = stubGet.orgFeatures([{ name: 'org-access-controls' }])
     })
@@ -66,7 +66,7 @@ describe('heroku access:add', () => {
   context('with an org app without user permissions', () => {
     beforeEach(() => {
       cli.mockConsole()
-      apiGet = stubGet.orgApp()
+      apiGet = stubGet.teamApp()
       apiPost = stubPost.collaborators()
       apiGetOrgFeatures = stubGet.orgFeatures([])
     })

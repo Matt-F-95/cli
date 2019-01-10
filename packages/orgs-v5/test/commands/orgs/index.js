@@ -9,7 +9,7 @@ describe('heroku orgs', () => {
   afterEach(() => nock.cleanAll())
 
   it('shows Enterprise orgs only when passing the --enterprise flag', () => {
-    let apiGetOrgs = stubGet.orgs()
+    let apiGetOrgs = stubGet.teams()
 
     return cmd.run({flags: { enterprise: true }})
       .then(() => expect(
@@ -20,7 +20,7 @@ org b          admin\n`).to.eq(cli.stdout))
   })
 
   it('shows orgs (now called teams)', () => {
-    let apiGetOrgsOnly = stubGet.orgs([
+    let apiGetOrgsOnly = stubGet.teams([
       {name: 'org a', role: 'collaborator', type: 'enterprise'},
       {name: 'org b', role: 'admin', type: 'enterprise'}
     ])

@@ -33,7 +33,7 @@ function appPermissions () {
     ])
 }
 
-function orgs (orgs = [
+function teams (orgs = [
   {name: 'org a', role: 'collaborator', type: 'enterprise'},
   {name: 'team a', role: 'collaborator', type: 'team'},
   {name: 'org b', role: 'admin', type: 'enterprise'},
@@ -44,7 +44,7 @@ function orgs (orgs = [
     .reply(200, orgs)
 }
 
-function orgApp (locked = false) {
+function teamApp (locked = false) {
   return nock('https://api.heroku.com:443')
     .get('/apps/myapp')
     .reply(200, {
@@ -54,7 +54,7 @@ function orgApp (locked = false) {
     })
 }
 
-function orgAppCollaboratorsWithPermissions () {
+function teamAppCollaboratorsWithPermissions () {
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3'}
   })
@@ -190,8 +190,8 @@ module.exports = {
   appCollaborators,
   appPermissions,
   orgs,
-  orgApp,
-  orgAppCollaboratorsWithPermissions,
+  teamApp,
+  teamAppCollaboratorsWithPermissions,
   orgInfo,
   orgFeatures,
   teamInvites,
