@@ -141,7 +141,7 @@ example
 
 === Collaborated Apps
 collab-app  someone-else@bar.com
-team-app-1   test-team@herokumanager.com
+team-app-1  test-team@herokumanager.com
 `)
       })
     })
