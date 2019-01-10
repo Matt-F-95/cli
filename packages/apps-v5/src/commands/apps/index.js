@@ -72,7 +72,7 @@ function * run (context, heroku) {
   }
 
   let path = '/users/~/apps'
-  if (org) path = `/organizations/${org}/apps`
+  if (org) path = `/teams/${org}/apps`
   else if (context.flags.all) path = '/apps'
   let [apps, user] = yield [
     heroku.get(path),

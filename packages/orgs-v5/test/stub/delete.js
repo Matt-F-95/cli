@@ -6,7 +6,7 @@ function collaboratorsOrgApp (app, email) {
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3'}
   })
-    .delete(`/organizations/apps/${app}/collaborators/${email}`).reply(200, {})
+    .delete(`/teams/apps/${app}/collaborators/${email}`).reply(200, {})
 }
 
 function collaboratorsPersonalApp (app, email) {
@@ -18,12 +18,12 @@ function teamInvite (email = 'foo@email.com') {
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3.team-invitations'}
   })
-    .delete(`/organizations/myorg/invitations/${email}`).reply(200, {})
+    .delete(`/teams/myorg/invitations/${email}`).reply(200, {})
 }
 
 function memberFromOrg () {
   return nock('https://api.heroku.com:443', {})
-    .delete('/organizations/myorg/members/foo%40foo.com').reply(200)
+    .delete('/teams/myorg/members/foo%40foo.com').reply(200)
 }
 
 module.exports = {

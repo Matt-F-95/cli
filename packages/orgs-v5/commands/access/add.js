@@ -15,7 +15,7 @@ async function run (context, heroku) {
 
   if (Utils.isOrgApp(appInfo.owner.email)) {
     let orgName = Utils.getOwner(appInfo.owner.email)
-    orgFeatures = await heroku.get(`/organizations/${orgName}/features`)
+    orgFeatures = await heroku.get(`/teams/${orgName}/features`)
   }
 
   if (orgFeatures.find(feature => feature.name === 'org-access-controls')) {
@@ -30,7 +30,7 @@ async function run (context, heroku) {
     permissions = _.uniq(permissions.sort())
     output += ` with ${cli.color.green(permissions)} permissions`
 
-    request = heroku.post(`/organizations/apps/${appName}/collaborators`, {
+    request = heroku.post(`/teams/apps/${appName}/collaborators`, {
       body: { user: context.args.email, permissions: permissions }
     })
   } else {

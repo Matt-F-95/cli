@@ -18,7 +18,7 @@ function * run (context, heroku) {
         Accept: 'application/vnd.heroku+json; version=3.team-invitations'
       },
       method: 'GET',
-      path: `/organizations/${groupName}/invitations`
+      path: `/teams/${groupName}/invitations`
     })
   }
 
@@ -28,18 +28,18 @@ function * run (context, heroku) {
         Accept: 'application/vnd.heroku+json; version=3.team-invitations'
       },
       method: 'DELETE',
-      path: `/organizations/${groupName}/invitations/${email}`
+      path: `/teams/${groupName}/invitations/${email}`
     })
     yield cli.action(`Revoking invite for ${cli.color.cyan(email)} in ${cli.color.magenta(groupName)}`, request)
   }
 
   let removeUserMembership = function * () {
-    let request = heroku.delete(`/organizations/${groupName}/members/${encodeURIComponent(email)}`)
+    let request = heroku.delete(`/teams/${groupName}/members/${encodeURIComponent(email)}`)
     yield cli.action(`Removing ${cli.color.cyan(email)} from ${cli.color.magenta(groupName)}`, request)
   }
 
   if (orgInfo.type === 'team') {
-    let orgFeatures = yield heroku.get(`/organizations/${groupName}/features`)
+    let orgFeatures = yield heroku.get(`/teams/${groupName}/features`)
     teamInviteFeatureEnabled = !!orgFeatures.find(feature => feature.name === 'team-invite-acceptance' && feature.enabled)
 
     if (teamInviteFeatureEnabled) {

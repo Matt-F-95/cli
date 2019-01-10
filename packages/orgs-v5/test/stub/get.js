@@ -24,7 +24,7 @@ function appPermissions () {
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3'}
   })
-    .get('/organizations/permissions')
+    .get('/teams/permissions')
     .reply(200, [
       { name: 'deploy' },
       { name: 'manage' },
@@ -40,7 +40,7 @@ function orgs (orgs = [
   {name: 'team b', role: 'admin', type: 'team'}
 ]) {
   return nock('https://api.heroku.com:443')
-    .get('/organizations')
+    .get('/teams')
     .reply(200, orgs)
 }
 
@@ -76,7 +76,7 @@ function orgFeatures (features) {
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3'}
   })
-    .get('/organizations/myorg/features')
+    .get('/teams/myorg/features')
     .reply(200, features)
 }
 
@@ -84,7 +84,7 @@ function orgInfo (type = 'enterprise') {
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3'}
   })
-    .get('/organizations/myorg')
+    .get('/teams/myorg')
     .reply(200, {
       name: 'myorg',
       role: 'admin',
@@ -110,7 +110,7 @@ function teamInvites (invites = [
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3.team-invitations'}
   })
-    .get('/organizations/myorg/invitations')
+    .get('/teams/myorg/invitations')
     .reply(200, invites)
 }
 
@@ -132,7 +132,7 @@ function orgMembers (members = [
   }
 ]) {
   return nock('https://api.heroku.com:443')
-    .get('/organizations/myorg/members')
+    .get('/teams/myorg/members')
     .reply(200, members)
 }
 
@@ -168,7 +168,7 @@ function variableSizeTeamInvites (teamSize) {
   return nock('https://api.heroku.com:443', {
     reqheaders: {Accept: 'application/vnd.heroku+json; version=3.team-invitations'}
   })
-    .get('/organizations/myorg/invitations')
+    .get('/teams/myorg/invitations')
     .reply(200, invites)
 }
 
@@ -181,7 +181,7 @@ function variableSizeOrgMembers (orgSize) {
       user: { email: `test${i}@heroku.com` }})
   }
   return nock('https://api.heroku.com:443')
-    .get('/organizations/myorg/members')
+    .get('/teams/myorg/members')
     .reply(200, orgMembers)
 }
 

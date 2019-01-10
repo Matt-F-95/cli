@@ -90,7 +90,7 @@ function stubUserApps (apps) {
 
 function stubOrgApps (org, apps) {
   return nock('https://api.heroku.com')
-    .get(`/organizations/${org}/apps`)
+    .get(`/teams/${org}/apps`)
     .reply(200, apps)
 }
 

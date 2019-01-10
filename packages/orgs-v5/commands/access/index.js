@@ -43,10 +43,10 @@ async function run (context, heroku) {
     let orgName = Utils.getOwner(app.owner.email)
 
     try {
-      const members = await heroku.get(`/organizations/${orgName}/members`)
+      const members = await heroku.get(`/teams/${orgName}/members`)
       let admins = members.filter(member => member.role === 'admin')
 
-      let adminPermissions = await heroku.get('/organizations/permissions')
+      let adminPermissions = await heroku.get('/teams/permissions')
 
       admins = _.forEach(admins, function (admin) {
         admin.user = { email: admin.email }

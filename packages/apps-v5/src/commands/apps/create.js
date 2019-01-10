@@ -28,7 +28,7 @@ async function createApp (context, heroku, name, stack) {
 
   let app = await heroku.request({
     method: 'POST',
-    path: (params.space || params.organization) ? '/organizations/apps' : '/apps',
+    path: (params.space || params.organization) ? '/teams/apps' : '/apps',
     body: params
   })
 

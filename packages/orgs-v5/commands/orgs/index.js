@@ -5,7 +5,7 @@ let co = require('co')
 let Utils = require('../../lib/utils')
 
 function * run (context, heroku) {
-  let orgs = yield heroku.get('/organizations')
+  let orgs = yield heroku.get('/teams')
 
   if (context.flags.enterprise) {
     orgs = orgs.filter(o => o.type === 'enterprise')

@@ -130,7 +130,7 @@ function * run (context, heroku) {
     apps = yield favoriteApps()
 
     data = yield {
-      orgs: heroku.request({path: '/organizations'}),
+      orgs: heroku.request({path: '/teams'}),
       notifications: heroku.request({host: 'telex.heroku.com', path: '/user/notifications'}).catch(() => null),
       apps: apps.map((app) => ({
         app: heroku.get(`/apps/${app}`),

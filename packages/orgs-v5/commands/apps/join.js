@@ -6,7 +6,7 @@ let co = require('co')
 function * run (context, heroku) {
   let request = heroku.get('/account')
     .then(function (user) {
-      return heroku.post(`/organizations/apps/${context.app}/collaborators`, {
+      return heroku.post(`/teams/apps/${context.app}/collaborators`, {
         body: { user: user.email }
       })
     })
