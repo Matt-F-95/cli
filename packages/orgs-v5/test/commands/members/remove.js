@@ -15,11 +15,11 @@ describe('heroku members:remove', () => {
     })
 
     it('removes a member from a team', () => {
-      let apiRemoveMemberFromOrg = stubDelete.memberFromTeam()
+      let apiRemoveMemberFromTeam = stubDelete.memberFromTeam()
       return cmd.run({org: 'myorg', args: {email: 'foo@foo.com'}})
         .then(() => expect('').to.eq(cli.stdout))
         .then(() => expect(`Removing foo@foo.com from myorg... done\n`).to.eq(cli.stderr))
-        .then(() => apiRemoveMemberFromOrg.done())
+        .then(() => apiRemoveMemberFromTeam.done())
     })
   })
 
@@ -35,23 +35,23 @@ describe('heroku members:remove', () => {
 
       context('using --org instead of --team', () => {
         it('removes the member, but it shows a warning about the usage of -t instead', () => {
-          let apiRemoveMemberFromOrg = stubDelete.memberFromTeam()
+          let apiRemoveMemberFromTeam = stubDelete.memberFromTeam()
           return cmd.run({org: 'myorg', args: {email: 'foo@foo.com'}, flags: {}})
             .then(() => expect('').to.eq(cli.stdout))
             .then(() => expect(`Removing foo@foo.com from myorg... done
  ▸    myorg is a Heroku Team
  ▸    Heroku CLI now supports Heroku Teams.
  ▸    Use -t or --team for teams like myorg\n`).to.eq(cli.stderr))
-            .then(() => apiRemoveMemberFromOrg.done())
+            .then(() => apiRemoveMemberFromTeam.done())
         })
       })
 
       it('removes a member from a team', () => {
-        let apiRemoveMemberFromOrg = stubDelete.memberFromTeam()
+        let apiRemoveMemberFromTeam = stubDelete.memberFromTeam()
         return cmd.run({args: {email: 'foo@foo.com'}, flags: {team: 'myorg'}})
           .then(() => expect('').to.eq(cli.stdout))
           .then(() => expect(`Removing foo@foo.com from myorg... done\n`).to.eq(cli.stderr))
-          .then(() => apiRemoveMemberFromOrg.done())
+          .then(() => apiRemoveMemberFromTeam.done())
       })
     })
 
@@ -68,12 +68,12 @@ describe('heroku members:remove', () => {
         })
 
         it('removes a member', () => {
-          let apiRemoveMemberFromOrg = stubDelete.memberFromTeam()
+          let apiRemoveMemberFromTeam = stubDelete.memberFromTeam()
           return cmd.run({args: {email: 'foo@foo.com'}, flags: {team: 'myorg'}})
             .then(() => expect('').to.eq(cli.stdout))
             .then(() => expect(`Removing foo@foo.com from myorg... done\n`).to.eq(cli.stderr))
             .then(() => apiGetTeamInvites.done())
-            .then(() => apiRemoveMemberFromOrg.done())
+            .then(() => apiRemoveMemberFromTeam.done())
         })
       })
 
