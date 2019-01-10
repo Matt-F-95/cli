@@ -147,7 +147,7 @@ describe('pipelines:setup', function () {
         let team
 
         beforeEach(function () {
-          team = 'test-org'
+          team = 'test-team'
 
           couplings.forEach(function (coupling) {
             api.post('/app-setups', {
@@ -158,7 +158,7 @@ describe('pipelines:setup', function () {
 
             api.get(`/app-setups/${coupling.id}`).reply(200, { status: 'succeeded' })
           })
-          api.get('/teams/test-org').reply(200, { id: '89-0123-456' })
+          api.get('/teams/test-team').reply(200, { id: '89-0123-456' })
           stubCI({ name: pipeline.name, repo: repo.name, organization: team, ci: true })
         })
 

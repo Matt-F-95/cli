@@ -9,10 +9,10 @@ function * run (context, heroku) {
   const {sortBy, partition} = require('lodash')
 
   let team = context.org || context.team || context.flags.team
-  let org = (!context.flags.personal && team) ? team : null
+  let team = (!context.flags.personal && team) ? team : null
   let space = context.flags.space
   let internalRouting = context.flags['internal-routing']
-  if (space) org = (yield heroku.get(`/spaces/${space}`)).organization.name
+  if (space) team = (yield heroku.get(`/spaces/${space}`)).team.name
 
   function annotateAppName (app) {
     let name = `${app.name}`
@@ -43,13 +43,13 @@ function * run (context, heroku) {
   function print (apps, user) {
     if (apps.length === 0) {
       if (space) cli.log(`There are no apps in space ${cli.color.green(space)}.`)
-      else if (org) cli.log(`There are no apps in team ${cli.color.magenta(org)}.`)
+      else if (team) cli.log(`There are no apps in team ${cli.color.magenta(team)}.`)
       else cli.log('You have no apps.')
     } else if (space) {
       cli.styledHeader(`Apps in space ${cli.color.green(space)}`)
       listApps(apps)
-    } else if (org) {
-      cli.styledHeader(`Apps in team ${cli.color.magenta(org)}`)
+    } else if (team) {
+      cli.styledHeader(`Apps in team ${cli.color.magenta(team)}`)
       listApps(apps)
     } else {
       apps = partition(apps, (app) => app.owner.email === user.email)
@@ -72,7 +72,7 @@ function * run (context, heroku) {
   }
 
   let path = '/users/~/apps'
-  if (org) path = `/teams/${org}/apps`
+  if (team) path = `/teams/${team}/apps`
   else if (context.flags.all) path = '/apps'
   let [apps, user] = yield [
     heroku.get(path),
