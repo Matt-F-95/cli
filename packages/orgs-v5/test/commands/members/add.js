@@ -21,7 +21,7 @@ describe('heroku members:add', () => {
         stubGet.teamInfo('team')
       })
 
-      it('does not warn the user when under the free org limit', () => {
+      it('does not warn the user when under the free team limit', () => {
         stubGet.variableSizeteamMembers(1)
         stubGet.variableSizeTeamInvites(0)
         apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
@@ -33,7 +33,7 @@ describe('heroku members:add', () => {
           .then(() => apiUpdateMemberRole.done())
       })
 
-      it('does not warn the user when over the free org limit', () => {
+      it('does not warn the user when over the free team limit', () => {
         stubGet.variableSizeteamMembers(7)
         stubGet.variableSizeTeamInvites(0)
         apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
@@ -45,7 +45,7 @@ describe('heroku members:add', () => {
           .then(() => apiUpdateMemberRole.done())
       })
 
-      it('does warn the user when at the free org limit', () => {
+      it('does warn the user when at the free team limit', () => {
         stubGet.variableSizeteamMembers(6)
         stubGet.variableSizeTeamInvites(0)
         apiUpdateMemberRole = stubPut.updateMemberRole('foo@foo.com', 'admin')
@@ -72,7 +72,7 @@ describe('heroku members:add', () => {
       })
     })
 
-    context('and group is an enterprise org', () => {
+    context('and group is an enterprise team', () => {
       beforeEach(() => {
         stubGet.teamInfo('enterprise')
         stubGet.variableSizeteamMembers(1)
@@ -96,7 +96,7 @@ describe('heroku members:add', () => {
       stubGet.teamInfo('team')
     })
 
-    it('does warn the user when free org limit is caused by invites', () => {
+    it('does warn the user when free team limit is caused by invites', () => {
       let apiSendInvite = stubPut.sendInvite('foo@foo.com', 'admin')
 
       let apiGetteamMembers = stubGet.variableSizeteamMembers(1)
